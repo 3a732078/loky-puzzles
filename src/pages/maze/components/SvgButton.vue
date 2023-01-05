@@ -19,19 +19,19 @@ export default {
       startType: this.provideStartType,
       terminalColor: [
         [
-          [169, 0, 0],
-          [0, 169, 0],
-          [0, 0, 169],
+          [255, 0, 0],
+          [0, 255, 0],
+          [0, 0, 255],
         ],
         [
-          [0, 169, 0],
-          [0, 0, 169],
-          [169, 0, 0],
+          [0, 255, 0],
+          [0, 0, 255],
+          [255, 0, 0],
         ],
         [
-          [0, 0, 169],
-          [169, 0, 0],
-          [0, 169, 0],
+          [0, 0, 255],
+          [255, 0, 0],
+          [0, 255, 0],
         ],
       ],
       terminalCount: 0,
@@ -138,32 +138,31 @@ export default {
       get() {
         return this.area['resultColor'];
       }
+    },
+    getImg: {
+      get() {
+        return 'src/assets/maze/mirror-' + this.area['mirror']['color'][0].toString()
+          + this.area['mirror']['color'][1].toString() + this.area['mirror']['color'][2].toString() + '-'
+          + this.area['mirror']['dx'].toString() + '-' + this.area['mirror']['dy'] + '.jpg'
+      }
     }
   },
 };
 </script>
 
 <template>
-  <!-- AREA (有顏色) -->
-  <svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52"
-    v-if="getIsSet && getAreaType !== 'terminal' && JSON.stringify([0, 0, 0]) !== JSON.stringify(area['mirror']['color'])">
-    <path :d="getD(area['mirror'])" :fill="'rgb(' + area['mirror']['color'] + ')'" />
-  </svg>
-  <!-- AREA (透鏡) -->
-  <svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52"
-    v-else-if="getIsSet && getAreaType !== 'terminal'">
-    <path :d="getD(area['mirror'])" stroke="rgb(169,169,169)" fill="none" />
-  </svg>
-
+  <!-- 有設定鏡子 -->
+  <img :src="getImg" alt="鏡子" width="60" v-if="getIsSet && getAreaType !== 'terminal' " />
   <!-- 空位 -->
-  <svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52"
-    v-if="!getIsSet && getAreaType !== 'terminal'"></svg>
+  <svg width="60" height="60" style="background-color: rgb(20, 20, 20);" view-box="0 0 60 60"
+    v-else-if="!getIsSet && getAreaType !== 'terminal'">
+  </svg>
 
   <!-- 終點 -->
-  <svg width="52" height="52" view-box="0 0 52 52" v-if="getIsSet && getAreaType === 'terminal'">
-    <rect x="2" y="2" width="48" height="48" rx="4" :fill="'rgb(' + getTerminalColor + ')'" />
-
-    <rect x="12" y="12" width="28" height="28" rx="14" :fill="'rgb(' + getResultColor + ')'" />
-
+  <svg width="60" height="60" view-box="0 0 60 60" v-if="getIsSet && getAreaType === 'terminal'"
+    style="background-color: rgb(20,20,20);">
+    <rect x="5" y="5" width="50" height="50" rx="4" :fill="'rgb(' + getTerminalColor + ')'" />
+    <rect x="10" y="10" width="40" height="40" rx="20" :fill="'rgb(' + getResultColor + ')'" />
   </svg>
+
 </template>

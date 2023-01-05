@@ -3,7 +3,7 @@
     clickable
     tag="a"
     target="_blank"
-    :href="link"
+    @click="handleRouter"
   >
     <q-item-section
       v-if="icon"
@@ -37,12 +37,19 @@ export default defineComponent({
 
     link: {
       type: String,
-      default: '#'
+      default: 'main'
     },
 
     icon: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    handleRouter() {
+      this.$router.push({
+        name: this.link,
+      })
     }
   }
 })

@@ -1,6 +1,6 @@
 <script>
 export default {
-	props: ["propsColor", 'propsAngle'],
+	props: ["propsColor", 'propsAngle', 'propsParadigm'],
 	inject: [
 		"provideBoardData",
 		"provideAreas",
@@ -20,6 +20,7 @@ export default {
 			terminalCount: 0,
 			color: null,
 			angle: null,
+			paradigm: null,
 		};
 	},
 	watch: {
@@ -34,6 +35,13 @@ export default {
 		propsAngle: {
 			handler(newValue) {
 				this.angle = newValue;
+			},
+			deep: true,
+			immediate: true,
+		},
+		propsParadigm: {
+			handler(newValue) {
+				this.paradigm = newValue;
 			},
 			deep: true,
 			immediate: true,
@@ -72,6 +80,13 @@ export default {
 			get() {
 				return JSON.stringify(this.color) === JSON.stringify([0, 0, 0]) ? 'none' : 'color(' + this.color + ')'
 			}
+		},
+		getImg: {
+			get() {
+				return 'src/assets/maze/mirror-' + this.color[0].toString()
+					+ this.color[1].toString() + this.color[2].toString()
+					+ '-' + this.angle['dx'].toString() + '-' + this.angle['dy'] + '.jpg'
+			}
 		}
 	},
 };
@@ -80,18 +95,6 @@ export default {
 <template>
 	<!-- AREA -->
 	<!-- {{area}} -->
-	<svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52" v-if="JSON.stringify([0,0,0]) !== JSON.stringify(color)">
-		<path :d="getD()" :fill="'rgb(' + color + ')'" />
-	</svg>
-	<svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52" v-else>
-		<path :d="getD()" stroke="rgb(169,169,169)" fill="none" />
-	</svg>
+	<img :src="getImg" alt="鏡子" width="60" />
 
-	<!-- 外框 -->
-	<svg width="52" height="52" view-box="0 0 52 52" v-if="getIsSet && getAreaType === 'terminal'">
-		<rect x="2" y="2" width="48" height="48" rx="4" :fill="'rgb(' + getTerminalColor + ')'" />
-
-		<rect x="12" y="12" width="28" height="28" rx="14" :fill="'rgb(' + getResultColor + ')'" />
-
-	</svg>
 </template>

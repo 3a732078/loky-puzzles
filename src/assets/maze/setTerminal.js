@@ -9,14 +9,14 @@ export default function (level, boardData, createTerminal) {
     ],
     [
       // 2
-      [0, 3],
+      [0, 1],
       [0, 4],
-      [4, 4]
+      [3, 4]
     ],
     [
-      [0, 0],
       [1, 0],
-      [4, 0]
+      [4, 0],
+      [0, 4],
     ]
   ];
   // 重設終點

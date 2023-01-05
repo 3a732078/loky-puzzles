@@ -19,7 +19,7 @@ export default function (boundary) {
             xIndex === boundary - 1
               ? true
               : false,
-          color: [169, 169, 169],
+          color: [255, 255, 255],
           dx:
             yIndex > 0 &&
             yIndex < boundary - 1 &&
@@ -52,12 +52,12 @@ export default function (boundary) {
   });
 
   // 加入起點 (emits)
-  const dx = 0;
+  const dx = 10;
   const dy = -10; // 往上
   const s = [(boundary * 60) / 2 + 10, (boundary - 1) * 60];
   let emits = [
     {
-      color: [169, 169, 169],
+      color: [255, 255, 255],
       s,
       dx,
       dy,

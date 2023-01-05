@@ -32,9 +32,12 @@ export default {
 </script>
 
 <template>
-  <svg   :width="getWidth" v-for="(line, lineIndex) in boardEmits" :key="lineIndex" :height="getWidth"
-    :view-box="getviewBox" style="border: 2px solid orange;position:absolute;left: 10%;top:65%">
-    <path :d="getD(line)" :stroke="'rgb(' + line['color'] + ')'" fill="none">
-    </path>
-  </svg>
+  <q-page-sticky position="top" :offset="[0, 200]" no-wrap v-for="(line, lineIndex) in boardEmits"  :key="lineIndex">
+
+    <svg :width="getWidth"  :height="getWidth"
+      :view-box="getviewBox" >
+      <path :d="getD(line)" :stroke="'rgb(' + line['color'] + ')'" fill="none">
+      </path>
+    </svg>
+  </q-page-sticky>
 </template>

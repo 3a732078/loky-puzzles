@@ -19,19 +19,19 @@ export default {
 			startType: this.provideStartType,
 			terminalColor: [
 				[
-					[169, 0, 0],
-					[0, 169, 0],
-					[0, 0, 169],
+					[255, 0, 0],
+					[0, 255, 0],
+					[0, 0, 255],
 				],
 				[
-					[0, 169, 0],
-					[0, 0, 169],
-					[169, 0, 0],
+					[0, 255, 0],
+					[0, 0, 255],
+					[255, 0, 0],
 				],
 				[
-					[0, 0, 169],
-					[169, 0, 0],
-					[0, 169, 0],
+					[0, 0, 255],
+					[255, 0, 0],
+					[0, 255, 0],
 				],
 			],
 			terminalCount: 0,
@@ -120,29 +120,23 @@ export default {
 			get() {
 				return [0, 0, 0];
 			}
-		}
+		},
+		getImg: {
+      get() {
+        return 'src/assets/maze/mirror-' + "000" +'-'
+          + this.angle['dx'].toString() + '-' + this.angle['dy'] + '.jpg'
+      }
+    }
 	},
 };
 </script>
 
 <template>
-	<!-- AREA -->
-	<!-- {{area}} -->
-	<svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52" v-if="angle['isSet']">
-		<path :d="getD()" :fill="'rgb(' + [169, 169, 169] + ')'" />
-	</svg>
+  <img :src="getImg" alt="鏡子" width="60"  v-if="angle['isSet']" />
 
 	<!-- 取消 -->
-	<svg width="52" height="52" style="border: 2px dashed orange" view-box="0 0 52 52" v-else>
-		<path d="M2,2 L 12,2 L52,42 L42,42 Z" :fill="'rgb(' + [169, 0, 169] + ')'" />
-		<path d="M52,2 L 42,2 L2,42 L12,42 Z" :fill="'rgb(' + [169, 0, 169] + ')'" />
-	</svg>
+	<div v-else class="text-h5 q-pa-md" >
+		X
+	</div>
 
-	<!-- 外框 -->
-	<svg width="52" height="52" view-box="0 0 52 52" v-if="getIsSet && getAreaType === 'terminal'">
-		<rect x="2" y="2" width="48" height="48" rx="4" :fill="'rgb(' + getTerminalColor + ')'" />
-
-		<rect x="12" y="12" width="28" height="28" rx="14" :fill="'rgb(' + getResultColor + ')'" />
-
-	</svg>
 </template>

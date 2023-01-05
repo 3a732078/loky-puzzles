@@ -94,13 +94,13 @@ export default function (boardEmits, mirrors, areas, speed) {
         }
         // #####  新增一的反射的line
         const newColor = [
-          hold["color"][0] === 169 && 169 === line["color"][0]
+          hold["color"][0] === 255 && 255 === line["color"][0]
             ? hold["color"][0]
             : 0,
-          hold["color"][1] === 169 && 169 === line["color"][1]
+          hold["color"][1] === 255 && 255 === line["color"][1]
             ? hold["color"][1]
             : 0,
-          hold["color"][2] === 169 && 169 === line["color"][2]
+          hold["color"][2] === 255 && 255 === line["color"][2]
             ? hold["color"][2]
             : 0
         ];
